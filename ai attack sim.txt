@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Attack Simulator - Social Shield</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <nav class="py-4 px-2 fixed top-0 left-0 right-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-blue-500 transition-transform duration-200 hover:scale-105">Social Shield</a>
+            <div class="space-x-6">
+                <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                <a href="analyzer.html" class="text-gray-400 hover:text-white transition-colors">Analyzer</a>
+                <a href="aiattack.html" class="text-white font-semibold border-b-2 border-blue-500 pb-1">AI Attack Sim</a>
+                <a href="about.html" class="text-gray-400 hover:text-white transition-colors">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="w-full">
+            <div id="analyzer-section" class="card p-8 w-full flex flex-col md:flex-row gap-8">
+                <div class="md:w-3/5 flex flex-col">
+                    <h2 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">Simulation Results</h2>
+                    <div id="chat-container" class="space-y-4 flex-grow overflow-y-auto pr-2" style="height: 500px;">
+                        <!-- Initial Attacker Message -->
+                        <div class="flex justify-start">
+                             <div class="chat-bubble-attacker">
+                                <div class="attacker-header">
+                                    <i class="fas fa-skull-crossbones"></i>
+                                    <h3 class="font-bold">AI Attacker Online</h3>
+                                </div>
+                                <div class="scam-message-container font-mono">
+                                    <p>Enter a social media post on the right. I will act as a malicious social engineer and craft a targeted scam based on the information you provide. This will show you how your words can be weaponized.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:w-2/5 flex flex-col space-y-4">
+                    <h2 class="text-xl font-bold mb-2">Enter Your Post to Attack</h2>
+                    <textarea id="inputText" class="p-4 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 'So excited for our two-week family vacation to Goa starting next Monday! The house will be empty...'" rows="8"></textarea>
+                    
+                    <button id="simulateButton" class="button w-full bg-orange-600 text-white font-bold py-3 px-6 rounded-full hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg">
+                        <i class="fas fa-bolt"></i> Launch Simulation
+                    </button>
+                    <div id="loadingIndicator" class="hidden text-center text-orange-400 font-semibold animate-pulse-slow">Simulating Attack...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputText = document.getElementById('inputText');
+            const simulateButton = document.getElementById('simulateButton');
+            const chatContainer = document.getElementById('chat-container');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            // --- PASTE YOUR API KEY HERE ---
+            const API_KEY = "AIzaSyDkh6hslbAVYizvMTgmQRBd4wCEXr-IwpU"; 
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+            function addMessage(text, isUser = false, isError = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+                
+                if (isUser) {
+                    messageDiv.innerHTML = `<div class="chat-bubble">${text}</div>`;
+                } else if (isError) {
+                    messageDiv.innerHTML = `<div class="chat-bubble-attacker font-mono">${text}</div>`;
+                }
+                else {
+                     messageDiv.innerHTML = `<div class="chat-bubble-attacker">
+                                                <div class="attacker-header">
+                                                    <i class="fas fa-skull-crossbones"></i>
+                                                    <h3 class="font-bold">Targeted Scam Generated</h3>
+                                                </div>
+                                                <div class="scam-message-container font-mono">
+                                                    <p>${text}</p>
+                                                </div>
+                                            </div>`;
+                }
+                chatContainer.appendChild(messageDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+            
+            async function runSimulation() {
+                const text = inputText.value.trim();
+                if (!text) {
+                    return;
+                }
+
+                if (API_KEY === "PASTE_YOUR_API_KEY_HERE") {
+                    addMessage("API Key is missing. Please add it to the aiattack.html file.", false, true);
+                    return;
+                }
+                
+                addMessage(text, true);
+                inputText.value = '';
+                loadingIndicator.classList.remove('hidden');
+                simulateButton.disabled = true;
+
+                const prompt = `Act as a malicious social engineer. Based on the following social media post, craft a convincing and targeted scam (like a phishing email or a fake alert message). Use specific details from the post to make the scam highly believable. Make the output just the text of the scam message. Do not add any preamble.
+                
+                POST: "${text}"
+                
+                SCAM:`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }]
+                };
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const result = await response.json();
+                    const scamText = result.candidates[0].content.parts[0].text;
+                    addMessage(scamText.replace(/\n/g, '<br>'), false);
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    addMessage("Could not run the attacker simulation. Please check your API key and try again.", false, true);
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                    simulateButton.disabled = false;
+                }
+            }
+
+            simulateButton.addEventListener('click', runSimulation);
+            inputText.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    runSimulation();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

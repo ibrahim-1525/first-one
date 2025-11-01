@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #111827;
+    color: #E5E7EB;
+    padding-top: 80px; 
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.card {
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .6; }
+}
+
+.button {
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
+}
+
+.button:active {
+    transform: translateY(-1px);
+}
+
+.risk-low { color: #34D399; font-weight: 700; }
+.risk-medium { color: #FBBF24; font-weight: 700; }
+.risk-high { color: #F87171; font-weight: 700; }
+
+.chat-bubble {
+    background-color: #374151;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    padding: 1rem;
+    max-width: 80%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.chat-bubble-ai {
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+    color: white;
+    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+    padding: 1rem;
+    max-width: 80%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- Attacker Simulation Styles --- */
+.font-mono {
+    font-family: 'Fira Code', monospace;
+}
+
+.chat-bubble-attacker {
+    background-color: #1F2937;
+    border: 1px solid #9A3412; /* Dark orange border */
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    max-width: 80%;
+    word-wrap: break-word;
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+}
+
+.attacker-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #F97316; /* Bright orange */
+}
+
+.attacker-header i {
+    font-size: 1.25rem;
+}
+
+.scam-message-container {
+    background-color: #111827;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+    border-left: 3px solid #F97316;
+}
+
