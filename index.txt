@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Shield - Personal Privacy Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <nav class="py-4 px-2 fixed top-0 left-0 right-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-blue-500 transition-transform duration-200 hover:scale-105">Social Shield</a>
+            <div class="space-x-6">
+                <a href="index.html" class="text-white font-semibold border-b-2 border-blue-500 pb-1">Home</a>
+                <a href="analyzer.html" class="text-gray-400 hover:text-white transition-colors">Analyzer</a>
+                <a href="aiattack.html" class="text-gray-400 hover:text-white transition-colors">AI Attack Sim</a>
+                <a href="about.html" class="text-gray-400 hover:text-white transition-colors">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container min-h-screen flex flex-col justify-center items-center">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-500 mb-2">Social Shield</h1>
+            <p class="text-xl text-gray-400">Your Personal Privacy Analyzer</p>
+        </header>
+
+        <main class="w-full flex-grow flex flex-col items-center">
+            <div id="intro-section" class="card p-8 md:p-12 mb-8 w-full">
+                <h2 class="text-2xl font-bold mb-4">The Dangers of Oversharing</h2>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Ever wonder if that photo or post could be used against you? Social media is a great way to connect, but oversharing can lead to serious risks like identity theft, scams, and public shaming. Attackers can piece together small bits of information to create a detailed profile of you.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <h3 class="font-bold text-lg mb-2 text-red-400">Identity Theft</h3>
+                        <p class="text-gray-400 text-sm">A photo of your house number or a post about your birthday can be used to guess passwords or verify identity for fraudulent activities.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <h3 class="font-bold text-lg mb-2 text-yellow-400">Scams & Phishing</h3>
+                        <p class="text-gray-400 text-sm">Sharing your travel plans can signal that your home is empty, making you a target for burglary. Details about your family can be used for "grandparent" scams.</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="analyzer.html" class="button inline-block bg-blue-600 text-white font-bold py-4 px-8 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-lg text-lg">
+                        Analyze Your Post Now →
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

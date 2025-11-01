@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Social Shield</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <nav class="py-4 px-2 fixed top-0 left-0 right-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-blue-500 transition-transform duration-200 hover:scale-105">Social Shield</a>
+            <div class="space-x-6">
+                <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                <a href="analyzer.html" class="text-gray-400 hover:text-white transition-colors">Analyzer</a>
+                <a href="aiattack.html" class="text-gray-400 hover:text-white transition-colors">AI Attack Sim</a>
+                <a href="about.html" class="text-white font-semibold border-b-2 border-blue-500 pb-1">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container min-h-screen flex flex-col justify-center items-center">
+        <main class="w-full">
+            <div class="card p-8 md:p-12 w-full">
+                <h2 class="text-3xl font-bold mb-6 text-center text-blue-400">About Social Shield</h2>
+                
+                <div class="space-y-6 text-gray-300 leading-relaxed">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Our Mission</h3>
+                        <p>Social Shield was created to help people understand the hidden risks of sharing information online. In a world where our lives are increasingly public, it's easy to post content without considering the long-term consequences. Our mission is to provide simple, powerful tools that empower users to make smarter, safer decisions about their digital footprint.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">How It Works</h3>
+                        <p>This tool leverages the power of Google's Gemini large language model. When you input text, it's sent to the AI which then analyzes the content for potential privacy vulnerabilities or, in the case of the simulator, acts as a malicious attacker to demonstrate potential threats. The analysis is for educational purposes to highlight how data can be exploited.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Privacy & Disclaimer</h3>
+                        <p class="font-bold">We do not store your data.</p>
+                        <p>Any text you enter for analysis is sent directly to the Google API and is not logged, saved, or monitored by us. The analysis is for educational purposes only and should not be considered a complete guarantee of security. Always exercise caution when sharing online.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
